@@ -1,0 +1,7 @@
+hwxml/xml/aa10/755/aa10755.xml
+hwxml/xml/tr47/82/tr4782.xml
+hwxml/xml/ug50/39/ug5039.xml
+hwxml/xml/aa66/23/aa6623.xml
+hwxml/xml/bo11/65/bo1165.xml
+hwxml/xml/ud37/17/ud3717.xml
+hwxml/xml/aa12/7237/aa127237.xml
