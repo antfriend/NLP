@@ -21,18 +21,18 @@ print " "
 def Get_text(corpus_root = '/release/', file_IDs = '.*'):    
     #wordlists = PlaintextCorpusReader(corpus_root, '.*')
     wordlists = XMLCorpusReader(corpus_root, file_IDs)
-    print "corpus read from " + corpus_root + " ..."
+    print "processing " + corpus_root + file_IDs
     raw = wordlists.raw()
-    print "corpus rawed ..."
+    #print "corpus rawed ..."
     tokens = nltk.word_tokenize(raw)
-    print "corpus tokenized ..."
+    #print "corpus tokenized ..."
     text = nltk.Text(tokens)
-    print "corpus textified ..."
+    #print "corpus textified ..."
     
     simple_md = [word.lower() for word in text if word.isalpha()]
-    print "corpus lowercased and alphafied ..."
+    #print "corpus lowercased and alphafied ..."
     simple_md = [word for word in simple_md if word != 'source']
-    print "keyword *source* removed ..."
+    #print "keyword *source* removed ..."
     print "DONE!"
     return simple_md
 
