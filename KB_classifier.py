@@ -1,19 +1,18 @@
-#Feature Extractor to train this shit
+#Load Features from RD documents
 import os
 import nltk
 import loadwords
-import logging
+
+CSV_Field_Separator = '|'
+CSV_Filename = 'KB_FacetValues.csv'
+File_List_of_Documents_to_Classify = 'alldocs.txt'
 
 word_features = []
 
 #iterate a list of facet classes
 #da_Facet_Dir = 'wee_facets/'
-da_Facet_Dir = 'new_FacetValues/'
-
-# create logger with 'spam_application'
-logger = logging.getLogger('feature_extraction')
-logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler('features.log')
+#da_Facet_Dir = 'new_FacetValues/'
+da_Facet_Dir = 'FacetValues/'
 
 def define_facetvalues():
     f_facets = os.listdir(da_Facet_Dir)
@@ -37,8 +36,7 @@ print '*********************************'
 for da_FacetValue in da_FacetValues:
     #da_FacetValue = da_FacetValue.split('.')[0]
     print da_FacetValue
-
-    
+   
 print '*********************************'
 print '********* Collecting ***********'
 print '*********************************'
@@ -61,7 +59,7 @@ word_features = all_words.keys()[:1000]
 def document_features(da_document):
     #need to load the document and iterate it's words
     #da_document = massage_techdocs_path_string(da_document)
-    print 'path is ' + da_document
+    #print 'path is ' + da_document
     document_words = loadwords.Get_text('kb_xml/', da_document)
     features = {}
     #print document_words
@@ -108,13 +106,19 @@ def get_classifier():
     return classy
    
 def test_all_documents():
-    f = open('alldocs.txt', 'r')
+    f = open(File_List_of_Documents_to_Classify, 'r')
+    o = open(CSV_Filename, 'w')
     for test_hwid in f.read().split('\n'):        
             print test_hwid
+            
             print 'classified as '
-            print this_is(test_hwid)
+            da_classification = this_is(test_hwid)
+            o.write(chr(34) + test_hwid + chr(34) + CSV_Field_Separator + chr(34) + da_classification + chr(34) + chr(10))        
+            print da_classification
             print ' '
-
+    f.close()
+    o.close()
+    
 featuresets2 = get_featuresets()
 print '*** got features! ***'
 size = int(len(featuresets2) * 0.5)
